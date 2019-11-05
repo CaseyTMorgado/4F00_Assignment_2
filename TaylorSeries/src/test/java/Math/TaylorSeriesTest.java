@@ -7,13 +7,6 @@ import static org.junit.Assert.assertEquals;
 public class TaylorSeriesTest {
     private TaylorSeries taylorSeries = new TaylorSeries();
 
-    @Test
-    public void exp() {
-        String str= "I am done with Junit setup";
-
-
-        assertEquals(taylorSeries.exp(2,2), 4,0);
-    }
 
     @Test
     public void sin() {
@@ -79,5 +72,21 @@ public class TaylorSeriesTest {
     }
 
 
+
+
+    @Test
+    public void factorial() {
+        int expected = 120;
+        int actual = taylorSeries.factorial(5);
+        assertEquals(actual, expected);
+    }
+
+    @Test
+    public void exp() {
+        String str= "I am done with Junit setup";
+        double actual = taylorSeries.exp(2, 3);
+        double expected = 8;
+        assertEquals(expected, actual, 0);
+    }
 }
 

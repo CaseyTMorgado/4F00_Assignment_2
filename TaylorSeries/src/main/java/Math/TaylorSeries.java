@@ -9,9 +9,26 @@ public class TaylorSeries {
     public TaylorSeries() {
     }
 
-    public double exp(float x, float n){
+    public double exp(float base, float n){
+        float total = 0;
+        if (n == 0) {
+            return 1;
+        }
+        else {
+            double result = 1;
+            for (int i = 0; i < n; i++) {
+                result = result * base;
+            }
+            return result;
+        }
+    }
 
-        return 0;
+    public int factorial(float num) {
+        int result = 1;
+        for (int i = 1; i <= num ; i++) {
+            result *= i;
+        }
+        return result;
     }
 
     public double sin(float x, int n){
