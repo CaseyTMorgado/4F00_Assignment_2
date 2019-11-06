@@ -11,7 +11,7 @@ public class TaylorSeriesTest {
     @Test
     public void sin() {
         double x = 2;
-        double sin = TaylorSeries.sin(x,10);
+        double sin = TaylorSeries.sin(x,3);
 
         //the expected value below is because calculated by running the taylor series for sin three times
         //this is ran three times because as we approach infinity, the calculation becomes much larger and
@@ -30,7 +30,7 @@ public class TaylorSeriesTest {
     @Test
     public void cos() {
         double x = 1;
-        double actual = TaylorSeries.cos(x, 10);
+        double actual = TaylorSeries.cos(x, 3);
 
         //the expected value below is because calculated by running the taylor series for cos three times
         //this is ran three times because as we approach infinity, the calculation becomes much larger and
