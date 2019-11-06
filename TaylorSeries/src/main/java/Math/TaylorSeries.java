@@ -29,12 +29,11 @@ public class TaylorSeries {
         return result;
     }
 
-    public static double sin(double x){
-        int max = 3;
+    public static double sin(double x, int n){
         double result = x;
         int exponent = 3;
 
-        for (int i = 1; i <= max; i++) {
+        for (int i = 1; i <= n; i++) {
 
             double numerator = exp(x, exponent);
             double denominator = factorial(exponent);
@@ -52,12 +51,11 @@ public class TaylorSeries {
         return result;
     }
 
-    public static double cos(double x){
-        int max = 3;
+    public static double cos(double x, int n){
         double result = 1;
         int exponent = 2;
 
-        for (int i = 1; i <= max; i++) {
+        for (int i = 1; i <= n; i++) {
 
             double numerator = exp(x, exponent);
             double denominator = factorial(exponent);
