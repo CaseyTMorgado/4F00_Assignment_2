@@ -5,23 +5,23 @@ Repository is used for the project management and version control of COSC 4F00 A
 Assignment 2
 -	Junit testing
 -	Not allowed to use any math library in java
-    Not allowed to use
+    Not allowed to use: 
             Factorial, Tan, sine, cosine
--	Class 
-        Static
+-	Class: 
+        Static, 
             Not OOP
 -	Version upgrades are constituted by any significant changes
--	Version 1.0 of the class
-        Framework
-        Should fail
+-	Version 1.0 of the class:
+        Framework, 
+        Should fail, 
         No actual code is written to test
--	Version 2.0
+-	Version 2.0:
         1/3 done
--	Version 3.0
+-	Version 3.0:
         2/3 done
--	Version 4.0
-        Complete
-        4.xx
+-	Version 4.0:
+        Complete, 
+        4.xx,
             Any little changes
--	GitHub
+-	GitHub:
         Used for version control and project management
