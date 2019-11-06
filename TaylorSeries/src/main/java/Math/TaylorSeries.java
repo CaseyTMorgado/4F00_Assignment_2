@@ -6,10 +6,8 @@ package Math;
 public class TaylorSeries {
 
 
-    public TaylorSeries() {
-    }
 
-    public double exp(float base, float n){
+    public static double exp(float base, float n){
         float total = 0;
         if (n == 0) {
             return 1;
@@ -23,7 +21,7 @@ public class TaylorSeries {
         }
     }
 
-    public int factorial(float num) {
+    public static int factorial(float num) {
         int result = 1;
         for (int i = 1; i <= num ; i++) {
             result *= i;
@@ -31,46 +29,46 @@ public class TaylorSeries {
         return result;
     }
 
-    public double sin(float x, int n){
+    public static double sin(float x, int n){
 
         return 0;
     }
-    public double cos(float x, int n){
-
-        return 0;
-    }
-
-    public double tan(float x, int n){
+    public static double cos(float x, int n){
 
         return 0;
     }
 
-    public double arcsin(float x, int n){
+    public static double tan(float x, int n){
 
         return 0;
     }
 
-    public double arccos(float x, int n){
+    public static double arcsin(float x, int n){
 
         return 0;
     }
 
-    public double arctan(float x, int n){
+    public static double arccos(float x, int n){
 
         return 0;
     }
 
-    public double sec(float x, int n){
+    public static double arctan(float x, int n){
 
         return 0;
     }
 
-    public double csc(float x, int n){
+    public static double sec(float x, int n){
 
         return 0;
     }
 
-    public double cot(float x, int n){
+    public static double csc(float x, int n){
+
+        return 0;
+    }
+
+    public static double cot(float x, int n){
 
         return 0;
     }
