@@ -7,7 +7,7 @@ public class TaylorSeries {
 
 
 
-    public static double exp(float base, float n){
+    public static double exp(double base, double n){
         float total = 0;
         if (n == 0) {
             return 1;
@@ -21,21 +21,58 @@ public class TaylorSeries {
         }
     }
 
-    public static int factorial(float num) {
-        int result = 1;
+    public static double factorial(int num) {
+        double result = 1;
         for (int i = 1; i <= num ; i++) {
             result *= i;
         }
         return result;
     }
 
-    public static double sin(float x, int n){
+    public static double sin(double x){
+        int max = 3;
+        double result = x;
+        int exponent = 3;
 
-        return 0;
+        for (int i = 1; i <= max; i++) {
+
+            double numerator = exp(x, exponent);
+            double denominator = factorial(exponent);
+            double current = numerator/denominator;
+
+            if (i%2 == 0) {
+                result += current;
+            }
+            else {
+                result -= current;
+            }
+
+            exponent = exponent + 2;
+        }
+        return result;
     }
-    public static double cos(float x, int n){
 
-        return 0;
+    public static double cos(double x){
+        int max = 3;
+        double result = 1;
+        int exponent = 2;
+
+        for (int i = 1; i <= max; i++) {
+
+            double numerator = exp(x, exponent);
+            double denominator = factorial(exponent);
+            double current = numerator/denominator;
+
+            if (i%2 == 0) {
+                result += current;
+            }
+            else {
+                result -= current;
+            }
+
+            exponent = exponent + 2;
+        }
+        return result;
     }
 
     public static double tan(float x, int n){
