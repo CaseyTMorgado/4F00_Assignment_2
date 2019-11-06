@@ -5,7 +5,10 @@ package Math;
  */
 public class TaylorSeries {
 
-
+    public static final double E = 2.718281828459045D;
+    public static final double PI = 3.141592653589793D;
+    private static final double DEGREES_TO_RADIANS = 0.017453292519943295D;
+    private static final double RADIANS_TO_DEGREES = 57.29577951308232D;
 
     public static double exp(double base, double n){
         float total = 0;
@@ -73,9 +76,9 @@ public class TaylorSeries {
         return result;
     }
 
-    public static double tan(float x, int n){
-
-        return 0;
+    public static double tan(double x, int n){
+        double result = (sin(x,n)/cos(x,n));
+        return result;
     }
 
     public static double arcsin(float x, int n){
