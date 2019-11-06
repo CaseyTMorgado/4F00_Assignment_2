@@ -10,16 +10,39 @@ public class TaylorSeriesTest {
 
     @Test
     public void sin() {
-        double sin = TaylorSeries.sin(1, 10);
+        double x = 2;
+        double sin = TaylorSeries.sin(x);
 
-        assertEquals(Math.sin(1), sin,0);
+        //the expected value below is because calculated by running the taylor series for sin three times
+        //this is ran three times because as we approach infinity, the calculation becomes much larger and
+        //the result no longer fits in a double
+        //the calculated value is not close to sin as we are only running the loop three times
+        //as we increase the number of times the loop is ran, then the closer to sine our function will
+        //become
+        double expected = x - (TaylorSeries.exp(x, 3)/TaylorSeries.factorial(3)) +
+                (TaylorSeries.exp(x, 5)/TaylorSeries.factorial(5)) -
+                (TaylorSeries.exp(x, 7)/TaylorSeries.factorial(7));
+
+        assertEquals(expected, sin,0);
+
     }
 
     @Test
     public void cos() {
-        double cos = TaylorSeries.cos(1, 10);
+        double x = 1;
+        double actual = TaylorSeries.cos(x);
 
-        assertEquals(Math.cos(1), cos,0);
+        //the expected value below is because calculated by running the taylor series for cos three times
+        //this is ran three times because as we approach infinity, the calculation becomes much larger and
+        //the result no longer fits in a double
+        //the calculated value is not close to sin as we are only running the loop three times
+        //as we increase the number of times the loop is ran, then the closer to sine our function will
+        //become
+        double expected = 1 - (TaylorSeries.exp(x, 2)/TaylorSeries.factorial(2)) +
+                (TaylorSeries.exp(x, 4)/TaylorSeries.factorial(4)) -
+                (TaylorSeries.exp(x, 6)/TaylorSeries.factorial(6));
+
+        assertEquals(expected, actual,0);
     }
 
     @Test
@@ -76,9 +99,9 @@ public class TaylorSeriesTest {
 
     @Test
     public void factorial() {
-        int expected = 120;
-        int actual = TaylorSeries.factorial(5);
-        assertEquals(actual, expected);
+        double expected = 120;
+        double actual = TaylorSeries.factorial(5);
+        assertEquals(expected, actual, 0);
     }
 
     @Test
