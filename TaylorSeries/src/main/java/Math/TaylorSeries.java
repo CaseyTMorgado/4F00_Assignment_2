@@ -137,16 +137,14 @@ public class TaylorSeries {
     }
 
     static double arcsec(double x, int n){
-
-        return 0;
+        return (arccos((1/x),n));
     }
 
     static double arccsc(double x, int n){
-
-        return 0;
+        return (arcsin((1/x),n));
     }
 
     static double arccot(double x, int n){
-        return 0;
+        return (arctan((1/x),n));
     }
 }
