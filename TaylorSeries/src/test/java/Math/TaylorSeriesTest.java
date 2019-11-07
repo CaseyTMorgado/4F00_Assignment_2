@@ -47,9 +47,18 @@ public class TaylorSeriesTest {
 
     @Test
     public void tan() {
-        double tan = TaylorSeries.tan(1, 10);
+        double x = 1;
+        double tan = TaylorSeries.tan(x, 3);
 
-        assertEquals(Math.tan(1), tan,0);
+        double expected = (x - (TaylorSeries.exp(x, 3)/TaylorSeries.factorial(3)) +
+                (TaylorSeries.exp(x, 5)/TaylorSeries.factorial(5)) -
+                (TaylorSeries.exp(x, 7)/TaylorSeries.factorial(7)))
+                /
+                (1 - (TaylorSeries.exp(x, 2)/TaylorSeries.factorial(2)) +
+                (TaylorSeries.exp(x, 4)/TaylorSeries.factorial(4)) -
+                (TaylorSeries.exp(x, 6)/TaylorSeries.factorial(6)));
+
+        assertEquals(expected, tan,0);
     }
 
     @Test
