@@ -112,6 +112,30 @@ public class TaylorSeriesTest {
     }
 
     @Test
+    public void arcsec() {
+        double x = 1;
+        double arcsec = TaylorSeries.arcsec(x, 1000);
+        double expected = (TaylorSeries.PI/4);
+        assertEquals(expected, arcsec,0);
+    }
+
+    @Test
+    public void arccsc() {
+        double x = 1;
+        double arccsc = TaylorSeries.arccsc(x, 100000);
+        double expected = (TaylorSeries.PI/2);
+        assertEquals(expected, arccsc,0);
+    }
+
+    @Test
+    public void arccot() {
+        double x = 1;
+        double arccot = TaylorSeries.arccot(x, 100000);
+        double expected = 0;
+        assertEquals(expected, arccot,0);
+    }
+
+    @Test
     public void arctan() {
         double x = 1;
         double arctan = TaylorSeries.arctan(x, 1000);
