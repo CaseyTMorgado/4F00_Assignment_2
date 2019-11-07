@@ -98,25 +98,25 @@ public class TaylorSeriesTest {
     @Test
     public void arcsin() {
         double x = 1;
-        double arcsin = TaylorSeries.arcsin(x, 10);
-
-        assertEquals(Math.asin(1), arcsin,0);
+        double arcsin = TaylorSeries.arcsin(x, 100000);
+        double expected = (TaylorSeries.PI/2);
+        assertEquals(expected, arcsin,0);
     }
 
     @Test
     public void arccos() {
         double x = 1;
-        double arccos = TaylorSeries.arccos(x, 10);
-
-        assertEquals(Math.acos(1), arccos,0);
+        double arccos = TaylorSeries.arccos(x, 100000);
+        double expected = 0;
+        assertEquals(expected, arccos,0);
     }
 
     @Test
     public void arctan() {
         double x = 1;
-        double arctan = TaylorSeries.arctan(x, 10);
-
-        assertEquals(Math.atan(1), arctan,0);
+        double arctan = TaylorSeries.arctan(x, 1000);
+        double expected = (TaylorSeries.PI/4);
+        assertEquals(expected, arctan,0);
     }
 
     @Test
