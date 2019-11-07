@@ -5,10 +5,13 @@ package Math;
  */
 public class TaylorSeries {
 
-
+    public static final double E = 2.718281828459045D;
+    public static final double PI = 3.141592653589793D;
+    private static final double DEGREES_TO_RADIANS = 0.017453292519943295D;
+    private static final double RADIANS_TO_DEGREES = 57.29577951308232D;
 
     public static double exp(double base, double n){
-        float total = 0;
+        double total = 0;
         if (n == 0) {
             return 1;
         }
@@ -73,39 +76,40 @@ public class TaylorSeries {
         return result;
     }
 
-    public static double tan(float x, int n){
+    public static double tan(double x, int n){
+        double result = (sin(x,n)/cos(x,n));
+        return result;
+    }
+
+    public static double sec(double x, int n){
+
+        double result = (1/cos(x,n));
+        return result;
+    }
+
+    public static double csc(double x, int n){
+
+        double result = (1/sin(x,n));
+        return result;
+    }
+
+    public static double cot(double x, int n){
+        double result = (1/tan(x,n));
+        return result;
+    }
+
+    public static double arcsin(double x, int n){
 
         return 0;
     }
 
-    public static double arcsin(float x, int n){
+    public static double arccos(double x, int n){
 
         return 0;
     }
 
-    public static double arccos(float x, int n){
+    public static double arctan(double x, int n){
 
         return 0;
     }
-
-    public static double arctan(float x, int n){
-
-        return 0;
-    }
-
-    public static double sec(float x, int n){
-
-        return 0;
-    }
-
-    public static double csc(float x, int n){
-
-        return 0;
-    }
-
-    public static double cot(float x, int n){
-
-        return 0;
-    }
-
 }

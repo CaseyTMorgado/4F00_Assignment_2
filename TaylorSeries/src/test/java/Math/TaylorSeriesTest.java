@@ -5,8 +5,6 @@ import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 
 public class TaylorSeriesTest {
-//    private TaylorSeries TaylorSeries = new TaylorSeries();
-
 
     @Test
     public void sin() {
@@ -47,55 +45,79 @@ public class TaylorSeriesTest {
 
     @Test
     public void tan() {
-        double tan = TaylorSeries.tan(1, 10);
+        double x = 1;
+        double tan = TaylorSeries.tan(x, 3);
+        double expected = (x - (TaylorSeries.exp(x, 3)/TaylorSeries.factorial(3)) +
+                (TaylorSeries.exp(x, 5)/TaylorSeries.factorial(5)) -
+                (TaylorSeries.exp(x, 7)/TaylorSeries.factorial(7)))
+                /
+                (1 - (TaylorSeries.exp(x, 2)/TaylorSeries.factorial(2)) +
+                (TaylorSeries.exp(x, 4)/TaylorSeries.factorial(4)) -
+                (TaylorSeries.exp(x, 6)/TaylorSeries.factorial(6)));
 
-        assertEquals(Math.tan(1), tan,0);
+        assertEquals(expected, tan,0);
     }
 
     @Test
     public void sec() {
-        double sec = TaylorSeries.sec(1, 10);
+        double x = 1;
+        double sec = TaylorSeries.sec(x, 3);
+        double expected = 1/(1 - (TaylorSeries.exp(x, 2)/TaylorSeries.factorial(2)) +
+                (TaylorSeries.exp(x, 4)/TaylorSeries.factorial(4)) -
+                (TaylorSeries.exp(x, 6)/TaylorSeries.factorial(6)));
 
-        assertEquals(1/Math.cos(1), sec,0);
+        assertEquals(expected, sec,0);
     }
 
     @Test
     public void csc() {
-        double csc = TaylorSeries.csc(1, 10);
+        double x = 1;
+        double csc = TaylorSeries.csc(x, 3);
+        double expected = 1/(x - (TaylorSeries.exp(x, 3)/TaylorSeries.factorial(3)) +
+                (TaylorSeries.exp(x, 5)/TaylorSeries.factorial(5)) -
+                (TaylorSeries.exp(x, 7)/TaylorSeries.factorial(7)));
 
-        assertEquals(1/Math.sin(1), csc,0);
+        assertEquals(expected, csc,0);
     }
 
     @Test
     public void cot() {
-        double cot = TaylorSeries.cot(1, 10);
+        double x = 1;
+        double cot = TaylorSeries.cot(x, 3);
+        double expected = 1/((x - (TaylorSeries.exp(x, 3)/TaylorSeries.factorial(3)) +
+                (TaylorSeries.exp(x, 5)/TaylorSeries.factorial(5)) -
+                (TaylorSeries.exp(x, 7)/TaylorSeries.factorial(7)))
+                /
+                (1 - (TaylorSeries.exp(x, 2)/TaylorSeries.factorial(2)) +
+                        (TaylorSeries.exp(x, 4)/TaylorSeries.factorial(4)) -
+                        (TaylorSeries.exp(x, 6)/TaylorSeries.factorial(6))));
 
-        assertEquals(1/Math.tan(1), cot,0);
+        assertEquals(expected, cot,0);
     }
 
     @Test
     public void arcsin() {
-        double arcsin = TaylorSeries.arcsin(1, 10);
+        double x = 1;
+        double arcsin = TaylorSeries.arcsin(x, 10);
 
         assertEquals(Math.asin(1), arcsin,0);
     }
 
     @Test
     public void arccos() {
-        double arccos = TaylorSeries.arccos(1, 10);
+        double x = 1;
+        double arccos = TaylorSeries.arccos(x, 10);
 
         assertEquals(Math.acos(1), arccos,0);
     }
 
     @Test
     public void arctan() {
-        double arctan = TaylorSeries.arctan(1, 10);
+        double x = 1;
+        double arctan = TaylorSeries.arctan(x, 10);
 
         assertEquals(Math.atan(1), arctan,0);
     }
-
-
-
 
     @Test
     public void factorial() {
