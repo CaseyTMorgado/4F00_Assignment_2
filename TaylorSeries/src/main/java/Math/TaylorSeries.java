@@ -23,12 +23,24 @@ public class TaylorSeries {
         }
     }
 
-    static double factorial(int num) {
-        double result = 1;
-        for (int i = 1; i <= num ; i++) {
-            result *= i;
+    static int factorial(int num) {
+        if (num < 0) { //negative num
+            num = num * -1; //make number positive
+            int result = 1;
+            for (int i = 1; i <= num ; i++) {
+                result *= i;
+            }
+            result = result * -1;
+            return result;
         }
-        return result;
+        else {
+            int result = 1;
+            for (int i = 1; i <= num ; i++) {
+                result *= i;
+            }
+            return result;
+        }
+
     }
 
     static double sin(double x, int n){
@@ -75,8 +87,15 @@ public class TaylorSeries {
         return result;
     }
 
-    static double tan(double x, int n){
-        return (sin(x,n)/cos(x,n));
+    static double tan(double x, int n) {
+        double result = sin(x,n)/cos(x,n);
+        boolean numberIsValid = (x % (PI/2) == 0);
+
+        if (numberIsValid) {
+            return Double.MIN_VALUE;
+        }
+        else
+            return result;
     }
 
     static double arcsin(double x, int n){
