@@ -147,4 +147,38 @@ public class TaylorSeries {
     static double arccot(double x, int n){
         return (arctan((1/x),n));
     }
+
+    static double toRadians(double degrees) {
+        return  degrees*DEGREES_TO_RADIANS;
+    }
+
+    static double toDegrees(double radians) {
+        return  radians*RADIANS_TO_DEGREES;
+    }
+
+    static double sqrRoot(double x) {
+        if (x == 0 || x == 1) {
+            return x;
+        }
+        else {
+            double low = 0;
+            double high = x;
+            double middle = -1;
+
+            for (int i = 0; i < 1000; i++) {
+                middle = (low + high)/2;
+                if (middle*middle == x) {
+                    return middle;
+                }
+                if (middle*middle > x) {
+                    high = middle;
+                }
+                else {
+                    low = middle;
+                }
+            }
+            return middle;
+        }
+    }
+
 }
