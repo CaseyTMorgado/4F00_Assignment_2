@@ -5,10 +5,12 @@ package Math;
  */
 public class TaylorSeries {
 
+    public static final double E = 2.718281828459045D;
+    static final double PI = 3.141592653589793D;
+    private static final double DEGREES_TO_RADIANS = 0.017453292519943295D;
+    private static final double RADIANS_TO_DEGREES = 57.29577951308232D;
 
-
-    public static double exp(double base, double n){
-        float total = 0;
+    static double exp(double base, double n){
         if (n == 0) {
             return 1;
         }
@@ -21,7 +23,7 @@ public class TaylorSeries {
         }
     }
 
-    public static double factorial(int num) {
+    static double factorial(int num) {
         double result = 1;
         for (int i = 1; i <= num ; i++) {
             result *= i;
@@ -29,12 +31,11 @@ public class TaylorSeries {
         return result;
     }
 
-    public static double sin(double x){
-        int max = 3;
+    static double sin(double x, int n){
         double result = x;
         int exponent = 3;
 
-        for (int i = 1; i <= max; i++) {
+        for (int i = 1; i <= n; i++) {
 
             double numerator = exp(x, exponent);
             double denominator = factorial(exponent);
@@ -52,12 +53,11 @@ public class TaylorSeries {
         return result;
     }
 
-    public static double cos(double x){
-        int max = 3;
+    static double cos(double x, int n){
         double result = 1;
         int exponent = 2;
 
-        for (int i = 1; i <= max; i++) {
+        for (int i = 1; i <= n; i++) {
 
             double numerator = exp(x, exponent);
             double denominator = factorial(exponent);
@@ -75,39 +75,76 @@ public class TaylorSeries {
         return result;
     }
 
-    public static double tan(float x, int n){
-
-        return 0;
+    static double tan(double x, int n){
+        return (sin(x,n)/cos(x,n));
     }
 
-    public static double arcsin(float x, int n){
+    static double arcsin(double x, int n){
+        double result = x;
+        int factor;
+        double multiplierNumerator = 1;
+        double multiplierDenominator = 2;
+        double multiplier = multiplierNumerator/multiplierDenominator;
 
-        return 0;
+        for (int i = 1; i <= n; i++) {
+            factor = 2*(i)+1;
+            double numerator = exp(x, factor);
+            double denominator = factor;
+            double current = multiplier * (numerator/denominator);
+
+            result += current;
+            multiplierNumerator +=2;
+            multiplierDenominator +=2;
+            multiplier = multiplier * (multiplierNumerator/multiplierDenominator);
+        }
+        return result;
     }
 
-    public static double arccos(float x, int n){
-
-        return 0;
+    static double arccos(double x, int n){
+        return (PI/2)-arcsin(x,n);
     }
 
-    public static double arctan(float x, int n){
+    static double arctan(double x, int n){
+        double result = x;
+        int factor;
 
-        return 0;
+        for (int i = 1; i <= n; i++) {
+            factor = 2*(i)+1;
+            double numerator = exp(x, factor);
+            double denominator = factor;
+            double current = numerator/denominator;
+
+            if (i%2 == 0) {
+                result += current;
+            }
+            else {
+                result -= current;
+            }
+        }
+        return result;
     }
 
-    public static double sec(float x, int n){
-
-        return 0;
+    static double sec(double x, int n){
+        return (1/cos(x,n));
     }
 
-    public static double csc(float x, int n){
-
-        return 0;
+    static double csc(double x, int n){
+        return (1/sin(x,n));
     }
 
-    public static double cot(float x, int n){
-
-        return 0;
+    static double cot(double x, int n){
+        return (1/tan(x,n));
     }
 
+    static double arcsec(double x, int n){
+        return (arccos((1/x),n));
+    }
+
+    static double arccsc(double x, int n){
+        return (arcsin((1/x),n));
+    }
+
+    static double arccot(double x, int n){
+        return (arctan((1/x),n));
+    }
 }
