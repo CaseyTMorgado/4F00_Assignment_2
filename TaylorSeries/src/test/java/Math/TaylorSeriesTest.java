@@ -165,10 +165,39 @@ public class TaylorSeriesTest {
 
     @Test
     public void toRadians() {
+        //degrees, radians
+        Map<Double, Double> testValues = new HashMap<Double, Double>();
+        testValues.put(360.0, 2.0*TaylorSeries.PI);
+        testValues.put(180.0, TaylorSeries.PI);
+        testValues.put(90.0, TaylorSeries.PI/2);
+        testValues.put(45.0, TaylorSeries.PI/4);
+        testValues.put(60.0, TaylorSeries.PI/3);
+
+        for (Map.Entry<Double, Double> entry : testValues.entrySet()) {
+            double val = entry.getKey();
+            double rad = TaylorSeries.toRadians(val);
+            double expected = entry.getValue();
+            assertEquals(rad, expected, DELTA);
+        }
     }
 
     @Test
     public void toDegrees() {
+        //radians, degrees
+        Map<Double, Double> testValues = new HashMap<Double, Double>();
+        testValues.put(2.0*TaylorSeries.PI, 360.0);
+        testValues.put(TaylorSeries.PI, 180.0);
+        testValues.put(TaylorSeries.PI/2, 90.0);
+        testValues.put(TaylorSeries.PI/4, 45.0);
+        testValues.put(TaylorSeries.PI/3, 60.0);
+
+        for (Map.Entry<Double, Double> entry : testValues.entrySet()) {
+            double val = entry.getKey();
+            double deg = TaylorSeries.toDegrees(val);
+            double expected = entry.getValue();
+            assertEquals(deg, expected, DELTA);
+        }
+
     }
 
     @Test
@@ -176,9 +205,9 @@ public class TaylorSeriesTest {
         Map<Double, Double> testValues = new HashMap<Double, Double>();
         testValues.put(0.0, 0.0);
         testValues.put(1.0, 1.0);
-        testValues.put(2.0, 1.414213562); //floor of actual value
+        testValues.put(2.0, 1.414213562);
         testValues.put(4.0, 2.0);
-        testValues.put(7.0, 2.645751311); //floor of actual value
+        testValues.put(7.0, 2.645751311);
 
         for (Map.Entry<Double, Double> entry : testValues.entrySet()) {
             double val = entry.getKey();
