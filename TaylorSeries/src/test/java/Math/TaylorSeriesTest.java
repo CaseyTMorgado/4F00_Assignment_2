@@ -13,6 +13,7 @@ public class TaylorSeriesTest {
     @Test
     public void sin() {
         int precisionValue = 15;
+        //degrees, expected result
         Map<Double, Double> testValues = new HashMap<Double, Double>();
         testValues.put(0.0, 0.0);
         testValues.put(30.0, 0.5);
@@ -39,6 +40,7 @@ public class TaylorSeriesTest {
     @Test
     public void cos() {
         int precisionValue = 15;
+        //degrees, expected result
         Map<Double, Double> testValues = new HashMap<Double, Double>();
         testValues.put(30.0, TaylorSeries.sqrRoot(3)/2);
         testValues.put(45.0, TaylorSeries.sqrRoot(2)/2);
@@ -59,6 +61,7 @@ public class TaylorSeriesTest {
     @Test
     public void tan() {
         int precisionValue = 15;
+        //degrees, expected result
         Map<Double, Double> testValues = new HashMap<Double, Double>();
         testValues.put(30.0, TaylorSeries.sqrRoot(3)/3);
         testValues.put(45.0, 1.0);
@@ -81,6 +84,7 @@ public class TaylorSeriesTest {
     @Test
     public void sec() {
         int precisionValue = 15;
+        //degrees, expected result
         Map<Double, Double> testValues = new HashMap<Double, Double>();
         testValues.put(30.0, (2*TaylorSeries.sqrRoot(3))/3);
         testValues.put(45.0, TaylorSeries.sqrRoot(2));
@@ -102,28 +106,48 @@ public class TaylorSeriesTest {
 
     @Test
     public void csc() {
-        double x = 1;
-        double csc = TaylorSeries.csc(x, 3);
-        double expected = 1/(x - (TaylorSeries.exp(x, 3)/TaylorSeries.factorial(3)) +
-                (TaylorSeries.exp(x, 5)/TaylorSeries.factorial(5)) -
-                (TaylorSeries.exp(x, 7)/TaylorSeries.factorial(7)));
+        int precisionValue = 15;
+        //degrees, expected result
+        Map<Double, Double> testValues = new HashMap<Double, Double>();
+        testValues.put(30.0, 2.0);
+        testValues.put(45.0, TaylorSeries.sqrRoot(2));
+        testValues.put(60.0, (2*TaylorSeries.sqrRoot(3))/3);
+        testValues.put(90.0, 1.0); //POSITIVE_INFINITY because inverse of min value in cos funct
+        testValues.put(180.0, Double.POSITIVE_INFINITY);
+        testValues.put(270.0, -1.0);
+        testValues.put(360.0, Double.POSITIVE_INFINITY);
+        testValues.put(0.0, Double.POSITIVE_INFINITY);
 
-        assertEquals(expected, csc,0);
+        for (Map.Entry<Double, Double> entry : testValues.entrySet()) {
+            double val = entry.getKey();
+            double degreesAsRadians = TaylorSeries.toRadians(val);
+            double csc = TaylorSeries.csc(degreesAsRadians, precisionValue);
+            double expected = entry.getValue();
+            assertEquals(csc, expected, DELTA);
+        }
     }
 
     @Test
     public void cot() {
-        double x = 1;
-        double cot = TaylorSeries.cot(x, 3);
-        double expected = 1/((x - (TaylorSeries.exp(x, 3)/TaylorSeries.factorial(3)) +
-                (TaylorSeries.exp(x, 5)/TaylorSeries.factorial(5)) -
-                (TaylorSeries.exp(x, 7)/TaylorSeries.factorial(7)))
-                /
-                (1 - (TaylorSeries.exp(x, 2)/TaylorSeries.factorial(2)) +
-                        (TaylorSeries.exp(x, 4)/TaylorSeries.factorial(4)) -
-                        (TaylorSeries.exp(x, 6)/TaylorSeries.factorial(6))));
+        int precisionValue = 15;
+        //degrees, expected result
+        Map<Double, Double> testValues = new HashMap<Double, Double>();
+        testValues.put(30.0, TaylorSeries.sqrRoot(3));
+        testValues.put(45.0, 1.0);
+        testValues.put(60.0, TaylorSeries.sqrRoot(3)/3);
+        testValues.put(90.0, Double.POSITIVE_INFINITY); //POSITIVE_INFINITY because inverse of min value in cos funct
+        testValues.put(180.0, Double.POSITIVE_INFINITY);
+        testValues.put(270.0, Double.POSITIVE_INFINITY);
+        testValues.put(360.0, Double.POSITIVE_INFINITY);
+        testValues.put(0.0, Double.POSITIVE_INFINITY);
 
-        assertEquals(expected, cot,0);
+        for (Map.Entry<Double, Double> entry : testValues.entrySet()) {
+            double val = entry.getKey();
+            double degreesAsRadians = TaylorSeries.toRadians(val);
+            double cot = TaylorSeries.cot(degreesAsRadians, precisionValue);
+            double expected = entry.getValue();
+            assertEquals(cot, expected, DELTA);
+        }
     }
 
     @Test
