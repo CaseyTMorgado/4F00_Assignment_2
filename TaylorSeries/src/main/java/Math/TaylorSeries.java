@@ -44,25 +44,36 @@ public class TaylorSeries {
     }
 
     static double sin(double x, int n){
-        double result = x;
-        int exponent = 3;
-
-        for (int i = 1; i <= n; i++) {
-
-            double numerator = exp(x, exponent);
-            double denominator = factorial(exponent);
-            double current = numerator/denominator;
-
-            if (i%2 == 0) {
-                result += current;
-            }
-            else {
-                result -= current;
-            }
-
-            exponent = exponent + 2;
+        if (x % PI == 0) {
+            return 0;
         }
-        return result;
+        else if (x % (3*PI/2) == 0) {
+            return -1;
+        }
+        else if (x % (PI/2) == 0) {
+            return 1;
+        }
+        else {
+            double result = x;
+            int exponent = 3;
+
+            for (int i = 1; i <= n; i++) {
+
+                double numerator = exp(x, exponent);
+                double denominator = factorial(exponent);
+                double current = numerator/denominator;
+
+                if (i%2 == 0) {
+                    result += current;
+                }
+                else {
+                    result -= current;
+                }
+
+                exponent = exponent + 2;
+            }
+            return result;
+        }
     }
 
     static double cos(double x, int n){
@@ -89,9 +100,10 @@ public class TaylorSeries {
 
     static double tan(double x, int n) {
         double result = sin(x,n)/cos(x,n);
-        boolean numberIsValid = (x % (PI/2) == 0);
+        double diff = x % (PI/2);
+        boolean numberIsInValid = (diff == 0);
 
-        if (numberIsValid) {
+        if (numberIsInValid) {
             return Double.MIN_VALUE;
         }
         else
