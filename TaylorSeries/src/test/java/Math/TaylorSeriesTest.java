@@ -80,13 +80,24 @@ public class TaylorSeriesTest {
 
     @Test
     public void sec() {
-        double x = 1;
-        double sec = TaylorSeries.sec(x, 3);
-        double expected = 1/(1 - (TaylorSeries.exp(x, 2)/TaylorSeries.factorial(2)) +
-                (TaylorSeries.exp(x, 4)/TaylorSeries.factorial(4)) -
-                (TaylorSeries.exp(x, 6)/TaylorSeries.factorial(6)));
+        int precisionValue = 15;
+        Map<Double, Double> testValues = new HashMap<Double, Double>();
+        testValues.put(30.0, (2*TaylorSeries.sqrRoot(3))/3);
+        testValues.put(45.0, TaylorSeries.sqrRoot(2));
+        testValues.put(60.0, 2.0);
+        testValues.put(90.0, Double.POSITIVE_INFINITY); //POSITIVE_INFINITY because inverse of min value in cos funct
+        testValues.put(180.0, -1.0);
+        testValues.put(270.0, Double.POSITIVE_INFINITY);
+        testValues.put(360.0, 1.0);
+        testValues.put(0.0, 1.0);
 
-        assertEquals(expected, sec,0);
+        for (Map.Entry<Double, Double> entry : testValues.entrySet()) {
+            double val = entry.getKey();
+            double degreesAsRadians = TaylorSeries.toRadians(val);
+            double sec = TaylorSeries.sec(degreesAsRadians, precisionValue);
+            double expected = entry.getValue();
+            assertEquals(sec, expected, DELTA);
+        }
     }
 
     @Test
