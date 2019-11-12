@@ -152,10 +152,25 @@ public class TaylorSeriesTest {
 
     @Test
     public void arcsin() {
-        double x = 1;
-        double arcsin = TaylorSeries.arcsin(x, 100000);
-        double expected = (TaylorSeries.PI/2);
-        assertEquals(expected, arcsin,0);
+        int precisionValue = 15;
+        //degrees, expected result
+        Map<Double, Double> testValues = new HashMap<Double, Double>();
+        testValues.put(0.0, 0.0);
+        testValues.put(-1.0, -TaylorSeries.PI/2);
+        testValues.put(1.0, TaylorSeries.PI/2);
+        testValues.put(2.0, Double.MIN_VALUE); //POSITIVE_INFINITY because inverse of min value in cos funct
+        testValues.put(-2.0, Double.MIN_VALUE);
+        testValues.put(0.5, TaylorSeries.PI/6);
+        testValues.put(-0.5, -TaylorSeries.PI/6);
+        testValues.put(0.75, 0.848062079);
+
+        for (Map.Entry<Double, Double> entry : testValues.entrySet()) {
+            double val = entry.getKey();
+            double degreesAsRadians = TaylorSeries.toRadians(val);
+            double arcsin = TaylorSeries.arcsin(degreesAsRadians, precisionValue);
+            double expected = entry.getValue();
+            assertEquals(arcsin, expected, DELTA);
+        }
     }
 
     @Test
@@ -274,6 +289,140 @@ public class TaylorSeriesTest {
             double squareRoot = TaylorSeries.sqrRoot(val);
             double expected = entry.getValue();
             assertEquals(squareRoot, expected, DELTA);
+        }
+    }
+
+    @Test
+    public void testSinDegrees() {
+        int precisionValue = 15;
+        //degrees, expected result
+        Map<Double, Double> testValues = new HashMap<Double, Double>();
+        testValues.put(0.0, 0.0);
+        testValues.put(30.0, 0.5);
+        testValues.put(45.0, TaylorSeries.sqrRoot(2)/2);
+        testValues.put(60.0, TaylorSeries.sqrRoot(3)/2);
+        testValues.put(90.0, 1.0);
+        testValues.put(180.0, 0.0);
+        //testValues.put(184.0, 0.0);
+        /*NOTE: As we approach multiples of PI (like PI/2, 3PI/2, PI),
+         * we need more iterations of the taylor series for our calculations
+         * to be accurate.  For that reason, values like 184 don't test extremely well.*/
+        testValues.put(360.0, 0.0);
+        testValues.put(270.0, -1.0);
+
+        for (Map.Entry<Double, Double> entry : testValues.entrySet()) {
+            double val = entry.getKey();
+            double sin = TaylorSeries.sin(val, precisionValue, true);
+            double expected = entry.getValue();
+            assertEquals(sin, expected, DELTA);
+        }
+    }
+
+    @Test
+    public void testCosDegrees() {
+        int precisionValue = 15;
+        //degrees, expected result
+        Map<Double, Double> testValues = new HashMap<Double, Double>();
+        testValues.put(30.0, TaylorSeries.sqrRoot(3)/2);
+        testValues.put(45.0, TaylorSeries.sqrRoot(2)/2);
+        testValues.put(60.0, 0.5);
+        testValues.put(90.0, 0.0);
+        testValues.put(180.0, -1.0);
+        testValues.put(360.0, 1.0);
+
+        for (Map.Entry<Double, Double> entry : testValues.entrySet()) {
+            double val = entry.getKey();
+            double cos = TaylorSeries.cos(val, precisionValue, true);
+            double expected = entry.getValue();
+            assertEquals(cos, expected, DELTA);
+        }
+    }
+
+    @Test
+    public void testTanDegrees() {
+        int precisionValue = 15;
+        //degrees, expected result
+        Map<Double, Double> testValues = new HashMap<Double, Double>();
+        testValues.put(30.0, TaylorSeries.sqrRoot(3)/3);
+        testValues.put(45.0, 1.0);
+        testValues.put(60.0, TaylorSeries.sqrRoot(3));
+        testValues.put(90.0, Double.MIN_VALUE);
+        testValues.put(180.0, 0.0);
+        testValues.put(270.0, Double.MIN_VALUE);
+        testValues.put(360.0, 0.0);
+        testValues.put(0.0, 0.0);
+
+        for (Map.Entry<Double, Double> entry : testValues.entrySet()) {
+            double val = entry.getKey();
+            double tan = TaylorSeries.tan(val, precisionValue, true);
+            double expected = entry.getValue();
+            assertEquals(tan, expected, DELTA);
+        }
+    }
+
+    @Test
+    public void testSecDegrees() {
+        int precisionValue = 15;
+        //degrees, expected result
+        Map<Double, Double> testValues = new HashMap<Double, Double>();
+        testValues.put(30.0, (2*TaylorSeries.sqrRoot(3))/3);
+        testValues.put(45.0, TaylorSeries.sqrRoot(2));
+        testValues.put(60.0, 2.0);
+        testValues.put(90.0, Double.POSITIVE_INFINITY); //POSITIVE_INFINITY because inverse of min value in cos funct
+        testValues.put(180.0, -1.0);
+        testValues.put(270.0, Double.POSITIVE_INFINITY);
+        testValues.put(360.0, 1.0);
+        testValues.put(0.0, 1.0);
+
+        for (Map.Entry<Double, Double> entry : testValues.entrySet()) {
+            double val = entry.getKey();
+            double sec = TaylorSeries.sec(val, precisionValue, true);
+            double expected = entry.getValue();
+            assertEquals(sec, expected, DELTA);
+        }
+    }
+
+    @Test
+    public void testCscDegrees() {
+        int precisionValue = 15;
+        //degrees, expected result
+        Map<Double, Double> testValues = new HashMap<Double, Double>();
+        testValues.put(30.0, 2.0);
+        testValues.put(45.0, TaylorSeries.sqrRoot(2));
+        testValues.put(60.0, (2*TaylorSeries.sqrRoot(3))/3);
+        testValues.put(90.0, 1.0); //POSITIVE_INFINITY because inverse of min value in cos funct
+        testValues.put(180.0, Double.POSITIVE_INFINITY);
+        testValues.put(270.0, -1.0);
+        testValues.put(360.0, Double.POSITIVE_INFINITY);
+        testValues.put(0.0, Double.POSITIVE_INFINITY);
+
+        for (Map.Entry<Double, Double> entry : testValues.entrySet()) {
+            double val = entry.getKey();
+            double csc = TaylorSeries.csc(val, precisionValue, true);
+            double expected = entry.getValue();
+            assertEquals(csc, expected, DELTA);
+        }
+    }
+
+    @Test
+    public void testCotDegrees() {
+        int precisionValue = 15;
+        //degrees, expected result
+        Map<Double, Double> testValues = new HashMap<Double, Double>();
+        testValues.put(30.0, TaylorSeries.sqrRoot(3));
+        testValues.put(45.0, 1.0);
+        testValues.put(60.0, TaylorSeries.sqrRoot(3)/3);
+        testValues.put(90.0, Double.POSITIVE_INFINITY); //POSITIVE_INFINITY because inverse of min value in cos funct
+        testValues.put(180.0, Double.POSITIVE_INFINITY);
+        testValues.put(270.0, Double.POSITIVE_INFINITY);
+        testValues.put(360.0, Double.POSITIVE_INFINITY);
+        testValues.put(0.0, Double.POSITIVE_INFINITY);
+
+        for (Map.Entry<Double, Double> entry : testValues.entrySet()) {
+            double val = entry.getKey();
+            double cot = TaylorSeries.cot(val, precisionValue, true);
+            double expected = entry.getValue();
+            assertEquals(cot, expected, DELTA);
         }
     }
 }
