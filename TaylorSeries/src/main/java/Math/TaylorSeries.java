@@ -77,25 +77,35 @@ public class TaylorSeries {
     }
 
     static double cos(double x, int n){
-        double result = 1;
-        int exponent = 2;
-
-        for (int i = 1; i <= n; i++) {
-
-            double numerator = exp(x, exponent);
-            double denominator = factorial(exponent);
-            double current = numerator/denominator;
-
-            if (i%2 == 0) {
-                result += current;
-            }
-            else {
-                result -= current;
-            }
-
-            exponent = exponent + 2;
+        if (x % (2*PI) == 0 || x == 0) {
+            return 1;
         }
-        return result;
+        else if (x % PI == 0) {
+            return -1;
+        }
+        else if (x % (PI/2) == 0) {
+            return 0;
+        }
+        else {
+            double result = 1;
+            int exponent = 2;
+
+            for (int i = 1; i <= n; i++) {
+
+                double numerator = exp(x, exponent);
+                double denominator = factorial(exponent);
+                double current = numerator / denominator;
+
+                if (i % 2 == 0) {
+                    result += current;
+                } else {
+                    result -= current;
+                }
+
+                exponent = exponent + 2;
+            }
+            return result;
+        }
     }
 
     static double tan(double x, int n) {

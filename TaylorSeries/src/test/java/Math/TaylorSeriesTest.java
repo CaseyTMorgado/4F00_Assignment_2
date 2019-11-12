@@ -8,7 +8,7 @@ import static org.junit.Assert.assertEquals;
 
 public class TaylorSeriesTest {
 
-    private static final double DELTA = 0.01;
+    private static final double DELTA = 0.00001;
 
     @Test
     public void sin() {
@@ -23,7 +23,7 @@ public class TaylorSeriesTest {
         //testValues.put(184.0, 0.0);
         /*NOTE: As we approach multiples of PI (like PI/2, 3PI/2, PI),
         * we need more iterations of the taylor series for our calculations
-        * to be accurate.  For that reason values like 184 dont test extremely well.*/
+        * to be accurate.  For that reason, values like 184 don't test extremely well.*/
         testValues.put(360.0, 0.0);
         testValues.put(270.0, -1.0);
 
@@ -44,8 +44,8 @@ public class TaylorSeriesTest {
         testValues.put(45.0, TaylorSeries.sqrRoot(2)/2);
         testValues.put(60.0, 0.5);
         testValues.put(90.0, 0.0);
-        //testValues.put(180.0, -1.0);
-        //testValues.put(360.0, 1.0);
+        testValues.put(180.0, -1.0);
+        testValues.put(360.0, 1.0);
 
         for (Map.Entry<Double, Double> entry : testValues.entrySet()) {
             double val = entry.getKey();
@@ -67,6 +67,7 @@ public class TaylorSeriesTest {
         testValues.put(180.0, 0.0);
         testValues.put(270.0, Double.MIN_VALUE);
         testValues.put(360.0, 0.0);
+        testValues.put(0.0, 0.0);
 
         for (Map.Entry<Double, Double> entry : testValues.entrySet()) {
             double val = entry.getKey();
