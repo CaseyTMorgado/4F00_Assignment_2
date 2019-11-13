@@ -425,5 +425,29 @@ public class TaylorSeriesTest {
             assertEquals(cot, expected, DELTA);
         }
     }
+
+    @Test
+    public void testArcsinDegrees() {
+    }
+
+    @Test
+    public void testArccosDegrees() {
+    }
+
+    @Test
+    public void testArctanDegrees() {
+    }
+
+    @Test
+    public void testArcsecDegrees() {
+    }
+
+    @Test
+    public void testArccscDegrees() {
+    }
+
+    @Test
+    public void testArccotDegrees() {
+    }
 }
 
