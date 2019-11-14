@@ -196,7 +196,7 @@ public class TaylorSeries {
         }
     }
 
-    static double arctan(double x, int n){
+    private static double arctanOne(double x, int n){
         double result = x;
         int factor;
 
@@ -216,13 +216,44 @@ public class TaylorSeries {
         return result;
     }
 
+    private static double arctanTwo(double x, int n){
+        double result;
+
+        if(x<=-1)
+            result = -PI/2 - 1/x;
+        else
+            result = PI/2 - 1/x;
+
+        int factor;
+
+        for (int i = 1; i <= n; i++) {
+            factor = 2*(i)+1;
+            double denominator = factor*exp(x,factor);
+            double current = 1/denominator;
+
+            if (i%2 == 0) {
+                result -= current;
+            }
+            else {
+                result += current;
+            }
+        }
+        return result;
+    }
+
     static double arctan(double x, int precision, boolean degrees) {
         if (degrees) {
             x = toRadians(x);
-            return arctan(x, precision);
+            if(x>-1 && x<1)
+                return arctanOne(x, precision);
+            else
+                return arctanTwo(x, precision);
         }
         else {
-            return arctan(x, precision);
+            if(x>-1 && x<1)
+                return arctanOne(x, precision);
+            else
+                return arctanTwo(x, precision);
         }
     }
 
@@ -296,18 +327,8 @@ public class TaylorSeries {
         }
     }
 
-    static double arccot(double x, int n){
-        return (PI/2-arctan((x),n));
-    }
-
     static double arccot(double x, int precision, boolean degrees) {
-        if (degrees) {
-            x = toRadians(x);
-            return arccot(x, precision);
-        }
-        else {
-            return arccot(x, precision);
-        }
+        return (PI/2-arctan((x),precision,degrees));
     }
 
     static double toRadians(double degrees) {
