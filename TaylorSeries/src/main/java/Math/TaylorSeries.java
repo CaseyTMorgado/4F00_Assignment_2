@@ -297,7 +297,7 @@ public class TaylorSeries {
     }
 
     static double arccot(double x, int n){
-        return (arctan((1/x),n));
+        return (PI/2-arctan((x),n));
     }
 
     static double arccot(double x, int precision, boolean degrees) {
