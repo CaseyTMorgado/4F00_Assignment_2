@@ -18,14 +18,14 @@ public class TaylorSeriesTest {
         Map<Double, Double> testValues = new HashMap<Double, Double>();
         testValues.put(0.0, 0.0);
         testValues.put(30.0, 0.5);
-        testValues.put(45.0, TaylorSeries.sqrRoot(2)/2);
-        testValues.put(60.0, TaylorSeries.sqrRoot(3)/2);
+        testValues.put(45.0, TaylorSeries.sqrRoot(2) / 2);
+        testValues.put(60.0, TaylorSeries.sqrRoot(3) / 2);
         testValues.put(90.0, 1.0);
         testValues.put(180.0, 0.0);
         //testValues.put(184.0, 0.0);
         /*NOTE: As we approach multiples of PI (like PI/2, 3PI/2, PI),
-        * we need more iterations of the taylor series for our calculations
-        * to be accurate.  For that reason, values like 184 don't test extremely well.*/
+         * we need more iterations of the taylor series for our calculations
+         * to be accurate.  For that reason, values like 184 don't test extremely well.*/
         testValues.put(360.0, 0.0);
         testValues.put(270.0, -1.0);
 
@@ -43,8 +43,8 @@ public class TaylorSeriesTest {
         int precisionValue = 15;
         //degrees, expected result
         Map<Double, Double> testValues = new HashMap<Double, Double>();
-        testValues.put(30.0, TaylorSeries.sqrRoot(3)/2);
-        testValues.put(45.0, TaylorSeries.sqrRoot(2)/2);
+        testValues.put(30.0, TaylorSeries.sqrRoot(3) / 2);
+        testValues.put(45.0, TaylorSeries.sqrRoot(2) / 2);
         testValues.put(60.0, 0.5);
         testValues.put(90.0, 0.0);
         testValues.put(180.0, -1.0);
@@ -64,7 +64,7 @@ public class TaylorSeriesTest {
         int precisionValue = 15;
         //degrees, expected result
         Map<Double, Double> testValues = new HashMap<Double, Double>();
-        testValues.put(30.0, TaylorSeries.sqrRoot(3)/3);
+        testValues.put(30.0, TaylorSeries.sqrRoot(3) / 3);
         testValues.put(45.0, 1.0);
         testValues.put(60.0, TaylorSeries.sqrRoot(3));
         testValues.put(90.0, Double.MIN_VALUE);
@@ -87,7 +87,7 @@ public class TaylorSeriesTest {
         int precisionValue = 15;
         //degrees, expected result
         Map<Double, Double> testValues = new HashMap<Double, Double>();
-        testValues.put(30.0, (2*TaylorSeries.sqrRoot(3))/3);
+        testValues.put(30.0, (2 * TaylorSeries.sqrRoot(3)) / 3);
         testValues.put(45.0, TaylorSeries.sqrRoot(2));
         testValues.put(60.0, 2.0);
         testValues.put(90.0, Double.POSITIVE_INFINITY); //POSITIVE_INFINITY because inverse of min value in cos funct
@@ -99,7 +99,7 @@ public class TaylorSeriesTest {
         for (Map.Entry<Double, Double> entry : testValues.entrySet()) {
             double val = entry.getKey();
             double degreesAsRadians = TaylorSeries.toRadians(val);
-            double sec = TaylorSeries.sec(degreesAsRadians, precisionValue,false);
+            double sec = TaylorSeries.sec(degreesAsRadians, precisionValue, false);
             double expected = entry.getValue();
             assertEquals(sec, expected, DELTA);
         }
@@ -112,7 +112,7 @@ public class TaylorSeriesTest {
         Map<Double, Double> testValues = new HashMap<Double, Double>();
         testValues.put(30.0, 2.0);
         testValues.put(45.0, TaylorSeries.sqrRoot(2));
-        testValues.put(60.0, (2*TaylorSeries.sqrRoot(3))/3);
+        testValues.put(60.0, (2 * TaylorSeries.sqrRoot(3)) / 3);
         testValues.put(90.0, 1.0); //POSITIVE_INFINITY because inverse of min value in cos funct
         testValues.put(180.0, Double.POSITIVE_INFINITY);
         testValues.put(270.0, -1.0);
@@ -135,7 +135,7 @@ public class TaylorSeriesTest {
         Map<Double, Double> testValues = new HashMap<Double, Double>();
         testValues.put(30.0, TaylorSeries.sqrRoot(3));
         testValues.put(45.0, 1.0);
-        testValues.put(60.0, TaylorSeries.sqrRoot(3)/3);
+        testValues.put(60.0, TaylorSeries.sqrRoot(3) / 3);
         testValues.put(90.0, Double.POSITIVE_INFINITY); //POSITIVE_INFINITY because inverse of min value in cos funct
         testValues.put(180.0, Double.POSITIVE_INFINITY);
         testValues.put(270.0, Double.POSITIVE_INFINITY);
@@ -157,12 +157,12 @@ public class TaylorSeriesTest {
         //radians, expected result
         Map<Double, Double> testValues = new HashMap<Double, Double>();
         testValues.put(0.0, 0.0);
-        testValues.put(-1.0, -TaylorSeries.PI/2);
-        testValues.put(1.0, TaylorSeries.PI/2);
+        testValues.put(-1.0, -TaylorSeries.PI / 2);
+        testValues.put(1.0, TaylorSeries.PI / 2);
         testValues.put(2.0, Double.POSITIVE_INFINITY);
         testValues.put(-2.0, Double.NEGATIVE_INFINITY);
-        testValues.put(0.5, TaylorSeries.PI/6);
-        testValues.put(-0.5, -TaylorSeries.PI/6);
+        testValues.put(0.5, TaylorSeries.PI / 6);
+        testValues.put(-0.5, -TaylorSeries.PI / 6);
         testValues.put(0.75, 0.848062079);
 
         for (Map.Entry<Double, Double> entry : testValues.entrySet()) {
@@ -178,7 +178,7 @@ public class TaylorSeriesTest {
         int precisionValue = 10000;
         //radians, expected result
         Map<Double, Double> testValues = new HashMap<Double, Double>();
-        testValues.put(0.0, TaylorSeries.PI/2);
+        testValues.put(0.0, TaylorSeries.PI / 2);
         testValues.put(-1.0, TaylorSeries.PI);
         testValues.put(1.0, 0.0);
         testValues.put(2.0, Double.NEGATIVE_INFINITY);
@@ -199,8 +199,8 @@ public class TaylorSeriesTest {
         //radians, expected result
         Map<Double, Double> testValues = new HashMap<Double, Double>();
         testValues.put(0.0, 0.0);
-        testValues.put(-1.0, (-TaylorSeries.PI/4));
-        testValues.put(1.0, TaylorSeries.PI/4);
+        testValues.put(-1.0, (-TaylorSeries.PI / 4));
+        testValues.put(1.0, TaylorSeries.PI / 4);
         testValues.put(2.0, 1.107148718);
         testValues.put(-2.0, -1.107148718);
         testValues.put(0.5, 0.463647609);
@@ -224,8 +224,8 @@ public class TaylorSeriesTest {
         testValues.put(0.0, Double.NEGATIVE_INFINITY);
         testValues.put(-1.0, TaylorSeries.PI);
         testValues.put(1.0, 0.0);
-        testValues.put(2.0, TaylorSeries.PI/3.0);
-        testValues.put(-2.0, 2*TaylorSeries.PI/3);
+        testValues.put(2.0, TaylorSeries.PI / 3.0);
+        testValues.put(-2.0, 2 * TaylorSeries.PI / 3);
         testValues.put(0.5, Double.NEGATIVE_INFINITY);
         testValues.put(-0.5, Double.POSITIVE_INFINITY);
         testValues.put(0.75, Double.NEGATIVE_INFINITY);
@@ -244,10 +244,10 @@ public class TaylorSeriesTest {
         //radians, expected result
         Map<Double, Double> testValues = new HashMap<Double, Double>();
         testValues.put(0.0, Double.POSITIVE_INFINITY);
-        testValues.put(-1.0, -(TaylorSeries.PI/2.0));
-        testValues.put(1.0, TaylorSeries.PI/2.0);
-        testValues.put(2.0, TaylorSeries.PI/6.0);
-        testValues.put(-2.0, -(TaylorSeries.PI/6));
+        testValues.put(-1.0, -(TaylorSeries.PI / 2.0));
+        testValues.put(1.0, TaylorSeries.PI / 2.0);
+        testValues.put(2.0, TaylorSeries.PI / 6.0);
+        testValues.put(-2.0, -(TaylorSeries.PI / 6));
         testValues.put(0.5, Double.POSITIVE_INFINITY);
         testValues.put(-0.5, Double.NEGATIVE_INFINITY);
         testValues.put(0.75, Double.POSITIVE_INFINITY);
@@ -265,9 +265,9 @@ public class TaylorSeriesTest {
         int precisionValue = 10000;
         //degrees, expected result
         Map<Double, Double> testValues = new HashMap<Double, Double>();
-        testValues.put(0.0, TaylorSeries.PI/2);
-        testValues.put(-1.0, (3*TaylorSeries.PI/4));
-        testValues.put(1.0, TaylorSeries.PI/4);
+        testValues.put(0.0, TaylorSeries.PI / 2);
+        testValues.put(-1.0, (3 * TaylorSeries.PI / 4));
+        testValues.put(1.0, TaylorSeries.PI / 4);
         testValues.put(0.5, 1.107148718);
         testValues.put(-0.5, 2.034443936);
         testValues.put(0.75, 0.927295218);
@@ -309,11 +309,11 @@ public class TaylorSeriesTest {
     public void toRadians() {
         //degrees, radians
         Map<Double, Double> testValues = new HashMap<Double, Double>();
-        testValues.put(360.0, 2.0*TaylorSeries.PI);
+        testValues.put(360.0, 2.0 * TaylorSeries.PI);
         testValues.put(180.0, TaylorSeries.PI);
-        testValues.put(90.0, TaylorSeries.PI/2);
-        testValues.put(45.0, TaylorSeries.PI/4);
-        testValues.put(60.0, TaylorSeries.PI/3);
+        testValues.put(90.0, TaylorSeries.PI / 2);
+        testValues.put(45.0, TaylorSeries.PI / 4);
+        testValues.put(60.0, TaylorSeries.PI / 3);
 
         for (Map.Entry<Double, Double> entry : testValues.entrySet()) {
             double val = entry.getKey();
@@ -327,11 +327,11 @@ public class TaylorSeriesTest {
     public void toDegrees() {
         //radians, degrees
         Map<Double, Double> testValues = new HashMap<Double, Double>();
-        testValues.put(2.0*TaylorSeries.PI, 360.0);
+        testValues.put(2.0 * TaylorSeries.PI, 360.0);
         testValues.put(TaylorSeries.PI, 180.0);
-        testValues.put(TaylorSeries.PI/2, 90.0);
-        testValues.put(TaylorSeries.PI/4, 45.0);
-        testValues.put(TaylorSeries.PI/3, 60.0);
+        testValues.put(TaylorSeries.PI / 2, 90.0);
+        testValues.put(TaylorSeries.PI / 4, 45.0);
+        testValues.put(TaylorSeries.PI / 3, 60.0);
 
         for (Map.Entry<Double, Double> entry : testValues.entrySet()) {
             double val = entry.getKey();
@@ -366,8 +366,8 @@ public class TaylorSeriesTest {
         Map<Double, Double> testValues = new HashMap<Double, Double>();
         testValues.put(0.0, 0.0);
         testValues.put(30.0, 0.5);
-        testValues.put(45.0, TaylorSeries.sqrRoot(2)/2);
-        testValues.put(60.0, TaylorSeries.sqrRoot(3)/2);
+        testValues.put(45.0, TaylorSeries.sqrRoot(2) / 2);
+        testValues.put(60.0, TaylorSeries.sqrRoot(3) / 2);
         testValues.put(90.0, 1.0);
         testValues.put(180.0, 0.0);
         //testValues.put(184.0, 0.0);
@@ -390,8 +390,8 @@ public class TaylorSeriesTest {
         int precisionValue = 15;
         //degrees, expected result
         Map<Double, Double> testValues = new HashMap<Double, Double>();
-        testValues.put(30.0, TaylorSeries.sqrRoot(3)/2);
-        testValues.put(45.0, TaylorSeries.sqrRoot(2)/2);
+        testValues.put(30.0, TaylorSeries.sqrRoot(3) / 2);
+        testValues.put(45.0, TaylorSeries.sqrRoot(2) / 2);
         testValues.put(60.0, 0.5);
         testValues.put(90.0, 0.0);
         testValues.put(180.0, -1.0);
@@ -410,7 +410,7 @@ public class TaylorSeriesTest {
         int precisionValue = 15;
         //degrees, expected result
         Map<Double, Double> testValues = new HashMap<Double, Double>();
-        testValues.put(30.0, TaylorSeries.sqrRoot(3)/3);
+        testValues.put(30.0, TaylorSeries.sqrRoot(3) / 3);
         testValues.put(45.0, 1.0);
         testValues.put(60.0, TaylorSeries.sqrRoot(3));
         testValues.put(90.0, Double.MIN_VALUE);
@@ -432,7 +432,7 @@ public class TaylorSeriesTest {
         int precisionValue = 15;
         //degrees, expected result
         Map<Double, Double> testValues = new HashMap<Double, Double>();
-        testValues.put(30.0, (2*TaylorSeries.sqrRoot(3))/3);
+        testValues.put(30.0, (2 * TaylorSeries.sqrRoot(3)) / 3);
         testValues.put(45.0, TaylorSeries.sqrRoot(2));
         testValues.put(60.0, 2.0);
         testValues.put(90.0, Double.POSITIVE_INFINITY); //POSITIVE_INFINITY because inverse of min value in cos funct
@@ -456,7 +456,7 @@ public class TaylorSeriesTest {
         Map<Double, Double> testValues = new HashMap<Double, Double>();
         testValues.put(30.0, 2.0);
         testValues.put(45.0, TaylorSeries.sqrRoot(2));
-        testValues.put(60.0, (2*TaylorSeries.sqrRoot(3))/3);
+        testValues.put(60.0, (2 * TaylorSeries.sqrRoot(3)) / 3);
         testValues.put(90.0, 1.0); //POSITIVE_INFINITY because inverse of min value in cos funct
         testValues.put(180.0, Double.POSITIVE_INFINITY);
         testValues.put(270.0, -1.0);
@@ -478,7 +478,7 @@ public class TaylorSeriesTest {
         Map<Double, Double> testValues = new HashMap<Double, Double>();
         testValues.put(30.0, TaylorSeries.sqrRoot(3));
         testValues.put(45.0, 1.0);
-        testValues.put(60.0, TaylorSeries.sqrRoot(3)/3);
+        testValues.put(60.0, TaylorSeries.sqrRoot(3) / 3);
         testValues.put(90.0, Double.POSITIVE_INFINITY); //POSITIVE_INFINITY because inverse of min value in cos funct
         testValues.put(180.0, Double.POSITIVE_INFINITY);
         testValues.put(270.0, Double.POSITIVE_INFINITY);
@@ -499,12 +499,12 @@ public class TaylorSeriesTest {
         //radians, expected result
         Map<Double, Double> testValues = new HashMap<Double, Double>();
         testValues.put(0.0, 0.0);
-        testValues.put(-1.0, -TaylorSeries.PI/2);
-        testValues.put(1.0, TaylorSeries.PI/2);
+        testValues.put(-1.0, -TaylorSeries.PI / 2);
+        testValues.put(1.0, TaylorSeries.PI / 2);
         testValues.put(2.0, Double.POSITIVE_INFINITY);
         testValues.put(-2.0, Double.NEGATIVE_INFINITY);
-        testValues.put(0.5, TaylorSeries.PI/6);
-        testValues.put(-0.5, -TaylorSeries.PI/6);
+        testValues.put(0.5, TaylorSeries.PI / 6);
+        testValues.put(-0.5, -TaylorSeries.PI / 6);
         testValues.put(0.75, 0.848062079);
 
         for (Map.Entry<Double, Double> entry : testValues.entrySet()) {
@@ -520,7 +520,7 @@ public class TaylorSeriesTest {
         int precisionValue = 10000;
         //radians, expected result
         Map<Double, Double> testValues = new HashMap<Double, Double>();
-        testValues.put(0.0, TaylorSeries.PI/2);
+        testValues.put(0.0, TaylorSeries.PI / 2);
         testValues.put(-1.0, TaylorSeries.PI);
         testValues.put(1.0, 0.0);
         testValues.put(2.0, Double.NEGATIVE_INFINITY);
@@ -541,8 +541,8 @@ public class TaylorSeriesTest {
         //radians, expected result
         Map<Double, Double> testValues = new HashMap<Double, Double>();
         testValues.put(0.0, 0.0);
-        testValues.put(-1.0, (-TaylorSeries.PI/4));
-        testValues.put(1.0, TaylorSeries.PI/4);
+        testValues.put(-1.0, (-TaylorSeries.PI / 4));
+        testValues.put(1.0, TaylorSeries.PI / 4);
         testValues.put(2.0, 1.107148718);
         testValues.put(-2.0, -1.107148718);
         testValues.put(0.5, 0.463647609);
@@ -565,8 +565,8 @@ public class TaylorSeriesTest {
         testValues.put(0.0, Double.NEGATIVE_INFINITY);
         testValues.put(-1.0, TaylorSeries.PI);
         testValues.put(1.0, 0.0);
-        testValues.put(2.0, TaylorSeries.PI/3.0);
-        testValues.put(-2.0, 2*TaylorSeries.PI/3);
+        testValues.put(2.0, TaylorSeries.PI / 3.0);
+        testValues.put(-2.0, 2 * TaylorSeries.PI / 3);
         testValues.put(0.5, Double.NEGATIVE_INFINITY);
         testValues.put(-0.5, Double.POSITIVE_INFINITY);
         testValues.put(0.75, Double.NEGATIVE_INFINITY);
@@ -585,10 +585,10 @@ public class TaylorSeriesTest {
         //radians, expected result
         Map<Double, Double> testValues = new HashMap<Double, Double>();
         testValues.put(0.0, Double.POSITIVE_INFINITY);
-        testValues.put(-1.0, -(TaylorSeries.PI/2.0));
-        testValues.put(1.0, TaylorSeries.PI/2.0);
-        testValues.put(2.0, TaylorSeries.PI/6.0);
-        testValues.put(-2.0, -(TaylorSeries.PI/6));
+        testValues.put(-1.0, -(TaylorSeries.PI / 2.0));
+        testValues.put(1.0, TaylorSeries.PI / 2.0);
+        testValues.put(2.0, TaylorSeries.PI / 6.0);
+        testValues.put(-2.0, -(TaylorSeries.PI / 6));
         testValues.put(0.5, Double.POSITIVE_INFINITY);
         testValues.put(-0.5, Double.NEGATIVE_INFINITY);
         testValues.put(0.75, Double.POSITIVE_INFINITY);
@@ -606,9 +606,9 @@ public class TaylorSeriesTest {
         int precisionValue = 10000;
         //degrees, expected result
         Map<Double, Double> testValues = new HashMap<Double, Double>();
-        testValues.put(0.0, TaylorSeries.PI/2);
-        testValues.put(-1.0, (3*TaylorSeries.PI/4));
-        testValues.put(1.0, TaylorSeries.PI/4);
+        testValues.put(0.0, TaylorSeries.PI / 2);
+        testValues.put(-1.0, (3 * TaylorSeries.PI / 4));
+        testValues.put(1.0, TaylorSeries.PI / 4);
         testValues.put(0.5, 1.107148718);
         testValues.put(-0.5, 2.034443936);
         testValues.put(0.75, 0.927295218);
