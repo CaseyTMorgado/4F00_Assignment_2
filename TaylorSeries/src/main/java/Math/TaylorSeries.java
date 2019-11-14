@@ -151,6 +151,48 @@ public class TaylorSeries {
         }
     }
 
+    static double sec(double x, int n){
+        return (1/cos(x,n));
+    }
+
+    static double sec(double x, int precision, boolean degrees) {
+        if (degrees) {
+            x = toRadians(x);
+            return sec(x, precision);
+        }
+        else {
+            return sec(x, precision);
+        }
+    }
+
+    static double csc(double x, int n){
+        return (1/sin(x,n));
+    }
+
+    static double csc(double x, int precision, boolean degrees) {
+        if (degrees) {
+            x = toRadians(x);
+            return csc(x, precision);
+        }
+        else {
+            return csc(x, precision);
+        }
+    }
+
+    static double cot(double x, int n){
+        return (1/tan(x,n));
+    }
+
+    static double cot(double x, int precision, boolean degrees) {
+        if (degrees) {
+            x = toRadians(x);
+            return cot(x, precision);
+        }
+        else {
+            return cot(x, precision);
+        }
+    }
+
     static double arcsin(double x, int n){
         double result = x;
         int factor;
@@ -218,7 +260,6 @@ public class TaylorSeries {
 
     private static double arctanTwo(double x, int n){
         double result;
-
         if(x<=-1)
             result = -PI/2 - 1/x;
         else
@@ -257,48 +298,6 @@ public class TaylorSeries {
         }
     }
 
-    static double sec(double x, int n){
-        return (1/cos(x,n));
-    }
-
-    static double sec(double x, int precision, boolean degrees) {
-        if (degrees) {
-            x = toRadians(x);
-            return sec(x, precision);
-        }
-        else {
-            return sec(x, precision);
-        }
-    }
-
-    static double csc(double x, int n){
-        return (1/sin(x,n));
-    }
-
-    static double csc(double x, int precision, boolean degrees) {
-        if (degrees) {
-            x = toRadians(x);
-            return csc(x, precision);
-        }
-        else {
-            return csc(x, precision);
-        }
-    }
-
-    static double cot(double x, int n){
-        return (1/tan(x,n));
-    }
-
-    static double cot(double x, int precision, boolean degrees) {
-        if (degrees) {
-            x = toRadians(x);
-            return cot(x, precision);
-        }
-        else {
-            return cot(x, precision);
-        }
-    }
-
     static double arcsec(double x, int n){
         return (arccos((1/x),n));
     }
@@ -328,7 +327,19 @@ public class TaylorSeries {
     }
 
     static double arccot(double x, int precision, boolean degrees) {
-        return (PI/2-arctan((x),precision,degrees));
+        if (degrees) {
+            x = toRadians(x);
+            if(x>-1 && x<1)
+                return (PI/2-arctanOne(x, precision));
+            else
+                return (PI/2-arctanTwo(x, precision));
+        }
+        else {
+            if(x>-1 && x<1)
+                return (PI/2-arctanOne(x, precision));
+            else
+                return (PI/2-arctanTwo(x, precision));
+        }
     }
 
     static double toRadians(double degrees) {
