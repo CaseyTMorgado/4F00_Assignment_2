@@ -9,6 +9,7 @@ import static org.junit.Assert.assertEquals;
 public class TaylorSeriesTest {
 
     private static final double DELTA = 0.00001;
+    private static final double INVERSE_DELTA = 0.01;
 
     @Test
     public void sin() {
@@ -31,7 +32,7 @@ public class TaylorSeriesTest {
         for (Map.Entry<Double, Double> entry : testValues.entrySet()) {
             double val = entry.getKey();
             double degreesAsRadians = TaylorSeries.toRadians(val);
-            double sin = TaylorSeries.sin(degreesAsRadians, precisionValue);
+            double sin = TaylorSeries.sin(degreesAsRadians, precisionValue, false);
             double expected = entry.getValue();
             assertEquals(sin, expected, DELTA);
         }
@@ -52,7 +53,7 @@ public class TaylorSeriesTest {
         for (Map.Entry<Double, Double> entry : testValues.entrySet()) {
             double val = entry.getKey();
             double degreesAsRadians = TaylorSeries.toRadians(val);
-            double cos = TaylorSeries.cos(degreesAsRadians, precisionValue);
+            double cos = TaylorSeries.cos(degreesAsRadians, precisionValue, false);
             double expected = entry.getValue();
             assertEquals(cos, expected, DELTA);
         }
@@ -75,7 +76,7 @@ public class TaylorSeriesTest {
         for (Map.Entry<Double, Double> entry : testValues.entrySet()) {
             double val = entry.getKey();
             double degreesAsRadians = TaylorSeries.toRadians(val);
-            double tan = TaylorSeries.tan(degreesAsRadians, precisionValue);
+            double tan = TaylorSeries.tan(degreesAsRadians, precisionValue, false);
             double expected = entry.getValue();
             assertEquals(tan, expected, DELTA);
         }
@@ -98,7 +99,7 @@ public class TaylorSeriesTest {
         for (Map.Entry<Double, Double> entry : testValues.entrySet()) {
             double val = entry.getKey();
             double degreesAsRadians = TaylorSeries.toRadians(val);
-            double sec = TaylorSeries.sec(degreesAsRadians, precisionValue);
+            double sec = TaylorSeries.sec(degreesAsRadians, precisionValue,false);
             double expected = entry.getValue();
             assertEquals(sec, expected, DELTA);
         }
@@ -121,7 +122,7 @@ public class TaylorSeriesTest {
         for (Map.Entry<Double, Double> entry : testValues.entrySet()) {
             double val = entry.getKey();
             double degreesAsRadians = TaylorSeries.toRadians(val);
-            double csc = TaylorSeries.csc(degreesAsRadians, precisionValue);
+            double csc = TaylorSeries.csc(degreesAsRadians, precisionValue, false);
             double expected = entry.getValue();
             assertEquals(csc, expected, DELTA);
         }
@@ -144,7 +145,7 @@ public class TaylorSeriesTest {
         for (Map.Entry<Double, Double> entry : testValues.entrySet()) {
             double val = entry.getKey();
             double degreesAsRadians = TaylorSeries.toRadians(val);
-            double cot = TaylorSeries.cot(degreesAsRadians, precisionValue);
+            double cot = TaylorSeries.cot(degreesAsRadians, precisionValue, false);
             double expected = entry.getValue();
             assertEquals(cot, expected, DELTA);
         }
@@ -152,65 +153,132 @@ public class TaylorSeriesTest {
 
     @Test
     public void arcsin() {
-        int precisionValue = 15;
-        //degrees, expected result
+        int precisionValue = 10000;
+        //radians, expected result
         Map<Double, Double> testValues = new HashMap<Double, Double>();
         testValues.put(0.0, 0.0);
         testValues.put(-1.0, -TaylorSeries.PI/2);
         testValues.put(1.0, TaylorSeries.PI/2);
-        testValues.put(2.0, Double.MIN_VALUE); //POSITIVE_INFINITY because inverse of min value in cos funct
-        testValues.put(-2.0, Double.MIN_VALUE);
+        testValues.put(2.0, Double.POSITIVE_INFINITY);
+        testValues.put(-2.0, Double.NEGATIVE_INFINITY);
         testValues.put(0.5, TaylorSeries.PI/6);
         testValues.put(-0.5, -TaylorSeries.PI/6);
         testValues.put(0.75, 0.848062079);
 
         for (Map.Entry<Double, Double> entry : testValues.entrySet()) {
             double val = entry.getKey();
-            double degreesAsRadians = TaylorSeries.toRadians(val);
-            double arcsin = TaylorSeries.arcsin(degreesAsRadians, precisionValue);
+            double arcsin = TaylorSeries.arcsin(val, precisionValue, false);
             double expected = entry.getValue();
-            assertEquals(arcsin, expected, DELTA);
+            assertEquals(arcsin, expected, INVERSE_DELTA);
         }
     }
 
     @Test
     public void arccos() {
-        double x = 1;
-        double arccos = TaylorSeries.arccos(x, 100000);
-        double expected = 0;
-        assertEquals(expected, arccos,0);
-    }
+        int precisionValue = 10000;
+        //radians, expected result
+        Map<Double, Double> testValues = new HashMap<Double, Double>();
+        testValues.put(0.0, TaylorSeries.PI/2);
+        testValues.put(-1.0, TaylorSeries.PI);
+        testValues.put(1.0, 0.0);
+        testValues.put(2.0, Double.NEGATIVE_INFINITY);
+        testValues.put(-2.0, Double.POSITIVE_INFINITY);
+        testValues.put(0.75, 0.722734247);
 
-    @Test
-    public void arcsec() {
-        double x = 1;
-        double arcsec = TaylorSeries.arcsec(x, 1000);
-        double expected = (TaylorSeries.PI/4);
-        assertEquals(expected, arcsec,0);
-    }
-
-    @Test
-    public void arccsc() {
-        double x = 1;
-        double arccsc = TaylorSeries.arccsc(x, 100000);
-        double expected = (TaylorSeries.PI/2);
-        assertEquals(expected, arccsc,0);
-    }
-
-    @Test
-    public void arccot() {
-        double x = 1;
-        double arccot = TaylorSeries.arccot(x, 100000);
-        double expected = 0;
-        assertEquals(expected, arccot,0);
+        for (Map.Entry<Double, Double> entry : testValues.entrySet()) {
+            double val = entry.getKey();
+            double arccos = TaylorSeries.arccos(val, precisionValue, false);
+            double expected = entry.getValue();
+            assertEquals(arccos, expected, INVERSE_DELTA);
+        }
     }
 
     @Test
     public void arctan() {
-        double x = 1;
-        double arctan = TaylorSeries.arctan(x, 1000);
-        double expected = (TaylorSeries.PI/4);
-        assertEquals(expected, arctan,0);
+
+        int precisionValue = 10000;
+        //radians, expected result
+        Map<Double, Double> testValues = new HashMap<Double, Double>();
+        testValues.put(0.0, 0.0);
+        testValues.put(-1.0, (-TaylorSeries.PI/4));
+        testValues.put(1.0, TaylorSeries.PI/4);
+        testValues.put(2.0, 1.107148718);
+        testValues.put(-2.0, -1.107148718);
+        testValues.put(0.5, 0.463647609);
+        testValues.put(-0.5, -0.463647609);
+        testValues.put(0.75, 0.643501108);
+
+        for (Map.Entry<Double, Double> entry : testValues.entrySet()) {
+            double val = entry.getKey();
+            double arctan = TaylorSeries.arctan(val, precisionValue, false);
+            double expected = entry.getValue();
+            assertEquals(expected, arctan, INVERSE_DELTA);
+        }
+    }
+
+
+    @Test
+    public void arcsec() {
+        int precisionValue = 10000;
+        //radians, expected result
+        Map<Double, Double> testValues = new HashMap<Double, Double>();
+        testValues.put(0.0, Double.NEGATIVE_INFINITY);
+        testValues.put(-1.0, TaylorSeries.PI);
+        testValues.put(1.0, 0.0);
+        testValues.put(2.0, TaylorSeries.PI/3.0);
+        testValues.put(-2.0, 2*TaylorSeries.PI/3);
+        testValues.put(0.5, Double.NEGATIVE_INFINITY);
+        testValues.put(-0.5, Double.POSITIVE_INFINITY);
+        testValues.put(0.75, Double.NEGATIVE_INFINITY);
+
+        for (Map.Entry<Double, Double> entry : testValues.entrySet()) {
+            double val = entry.getKey();
+            double arcsec = TaylorSeries.arcsec(val, precisionValue, false);
+            double expected = entry.getValue();
+            assertEquals(arcsec, expected, INVERSE_DELTA);
+        }
+    }
+
+    @Test
+    public void arccsc() {
+        int precisionValue = 10000;
+        //radians, expected result
+        Map<Double, Double> testValues = new HashMap<Double, Double>();
+        testValues.put(0.0, Double.POSITIVE_INFINITY);
+        testValues.put(-1.0, -(TaylorSeries.PI/2.0));
+        testValues.put(1.0, TaylorSeries.PI/2.0);
+        testValues.put(2.0, TaylorSeries.PI/6.0);
+        testValues.put(-2.0, -(TaylorSeries.PI/6));
+        testValues.put(0.5, Double.POSITIVE_INFINITY);
+        testValues.put(-0.5, Double.NEGATIVE_INFINITY);
+        testValues.put(0.75, Double.POSITIVE_INFINITY);
+
+        for (Map.Entry<Double, Double> entry : testValues.entrySet()) {
+            double val = entry.getKey();
+            double arccsc = TaylorSeries.arccsc(val, precisionValue, false);
+            double expected = entry.getValue();
+            assertEquals(arccsc, expected, INVERSE_DELTA);
+        }
+    }
+
+    @Test
+    public void arccot() {
+        int precisionValue = 10000;
+        //degrees, expected result
+        Map<Double, Double> testValues = new HashMap<Double, Double>();
+        testValues.put(0.0, TaylorSeries.PI/2);
+        testValues.put(-1.0, (3*TaylorSeries.PI/4));
+        testValues.put(1.0, TaylorSeries.PI/4);
+        testValues.put(0.5, 1.107148718);
+        testValues.put(-0.5, 2.034443936);
+        testValues.put(0.75, 0.927295218);
+
+        for (Map.Entry<Double, Double> entry : testValues.entrySet()) {
+            double val = entry.getKey();
+            double arccot = TaylorSeries.arccot(val, precisionValue, false);
+            double expected = entry.getValue();
+            assertEquals(arccot, expected, INVERSE_DELTA);
+        }
     }
 
     @Test
